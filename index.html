@@ -5,10 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estefi y Hernan | Si Quiero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-    <main>
-        <h1>Nos casamos</h1>
+    <main class="w-full max-w-5xl mx-auto">
+        <section class="uppercase space-y-6">
+            <h1 class="uppercase text-8xl pt-20">Save the day</h1>
+            <hr>
+            <div>
+                <h3 class="text-2xl">Estefi & Hernan</h3>
+                <p class="text-sm">Nos casamos y queremos compartir este gran momento junto a ustedes</p>
+                <p class="mt-3">11 de marzo de 2023</p>
+            </div>
+            <div x-data="{
+                countDownDate: null,
+                days: null,
+                hours: null,
+                minutes: null,
+                seconds: null,
+                init(){
+                    this.countDownDate = new Date('Mar 11, 2023 18:00:00').getTime()
+
+                    let func = setInterval(() => {
+                        let now = new Date().getTime()
+                        let timeleft = this.countDownDate - now
+
+                        this.days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                        this.hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        this.minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                        this.seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+                    }, 1000)
+                },
+            }">
+                <div class="space-x-4" x-show="days != null" x-cloak>
+                    <span x-text="days + ' d'"></span>
+                    <span x-text="hours + ' h'"></span>
+                    <span x-text="minutes + ' m'"></span>
+                    <span x-text="seconds + ' s'"></span>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>
